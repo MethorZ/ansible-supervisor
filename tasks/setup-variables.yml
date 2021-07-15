@@ -1,0 +1,29 @@
+---
+#
+# Default OS specific variable definitions / defaults
+#
+- block:
+  - name: INCLUDE_VARS | OS specific vars
+    include_vars: "{{ ansible_facts['os_family'] }}.yml"
+
+  - name: FACTS - Define supervisor package dependencies
+    set_fact:
+      supervisor_packages: "{{ __supervisor_packages | list }}"
+    when: supervisor_packages is not defined
+
+  - name: FACTS - Define the supervisor service / daemon
+    set_fact:
+      supervisor_service: "{{ __supervisor_service }}"
+    when: supervisor_service is not defined
+
+  - name: FACTS - Define supervisor config file
+    set_fact:
+      supervisor_config: "{{ __supervisor_config }}"
+    when: supervisor_config is not defined
+
+  - name: FACTS - Define supervisor program list
+    set_fact:
+      supervisor_program_list: "{{ __supervisor_default_conf + supervisor_conf_list }}"
+    when: supervisor_program_list is not defined
+
+  when: supervisor_enabled

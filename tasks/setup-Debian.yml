@@ -1,0 +1,22 @@
+---
+#
+# Setup all required packages
+#
+- block:
+
+  - name: APT | Updating the apt cache
+    apt:
+      update_cache: yes
+
+  - name: APT | Make sure supervisor packages are installed
+    apt:
+      name: "{{ supervisor_packages }}"
+      state: "{{ supervisor_packages_mode }}"
+
+  - name: SYSTEMD | Enable and start the supervisor service
+    systemd:
+      name: "{{ supervisor_service }}"
+      enabled: yes
+      state: started
+
+  when: supervisor_enabled

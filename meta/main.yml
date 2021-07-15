@@ -1,0 +1,16 @@
+galaxy_info:
+  role_name: supervisor
+  author: MethorZ
+  description: Ansible supervisor support for Debian
+  company: MethorZ
+  license: license (BSD, MIT)
+  min_ansible_version: 2.7
+  platforms:
+    - name: Debian
+      versions:
+        - all
+  galaxy_tags:
+    - debian
+    - supervisor
+
+dependencies: []

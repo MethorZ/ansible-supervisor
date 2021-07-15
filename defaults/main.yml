@@ -1,0 +1,16 @@
+---
+##
+# Supervisor default configuration
+##
+
+# Set to true to enable supervisor
+supervisor_enabled: false
+
+# Packages mode
+supervisor_packages_mode: present
+
+# List of supervised programs / directories
+supervisor_conf_list: []
+
+# List of supervisor sudoers
+supervisor_sudoers: []

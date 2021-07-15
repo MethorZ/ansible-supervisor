@@ -1,0 +1,28 @@
+---
+##
+# Configure the supervisor
+##
+
+- block:
+
+  - name: TEMPLATE | Apply supervisord.conf template
+    template:
+      src: "supervisord.conf.j2"
+      dest: "{{ supervisor_config }}"
+      owner: root
+      group: root
+      mode: 0644
+    notify: restart supervisor
+
+  - name: LINEINFILE | Allow required users to have passwordless sudo to supervisorctl
+    lineinfile:
+      dest: /etc/sudoers
+      state: present
+      regexp: '^{{ item }}]'
+      line: '{{ item }} ALL=(ALL) NOPASSWD: /usr/bin/supervisorctl'
+      validate: 'visudo -cf %s'
+    with_items: "{{ supervisor_sudoers }}"
+
+  when: supervisor_enabled
+
+- meta: flush_handlers

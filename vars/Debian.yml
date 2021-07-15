@@ -1,0 +1,13 @@
+---
+# Dependencies for mongo db
+__supervisor_packages:
+  - supervisor
+
+# Debian service name
+__supervisor_service: supervisor
+
+# Configuration file
+__supervisor_config: /etc/supervisor/supervisord.conf
+
+__supervisor_default_conf:
+  - /etc/supervisor/conf.d/*.conf
